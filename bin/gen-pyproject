@@ -49,6 +49,9 @@ if args.verfile:
 # This is more of a personal preference
 pyproj['project']['name'] = pyproj['project']['name'].lower()
 
+# Make it unequivocally clear this is a fork
+pyproj['project']['description'] = "An Unofficial packaging of Kalico (fka DangerKlipper)"
+
 
 with args.dst_path.open("w") as dst_f:
     tomlkit.dump(pyproj, dst_f)
