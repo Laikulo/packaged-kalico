@@ -1,4 +1,4 @@
-all: pytree
+all: pybuild
 
 RELEASE=dev2
 

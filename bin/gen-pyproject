@@ -53,7 +53,9 @@ pyproj['project']['name'] = pyproj['project']['name'].lower()
 pyproj['project']['description'] = "An Unofficial packaging of Kalico (fka DangerKlipper)"
 pyproj['project']['urls']['package source'] = "https://github.com/Laikulo/packaged-kalico"
 
-
+# Main entrypoint
+pyproj['project']['scripts'] = tomlkit.table()
+pyproj['project']['scripts']['kalico'] = "klippy.printer:main"
 
 
 with args.dst_path.open("w") as dst_f:
