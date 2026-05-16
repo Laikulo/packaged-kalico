@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+
+# /// script
+#  dependencies = [
+#    "tomlkit"
+#  ]
+# ///
+
+import argparse
+from pathlib import Path
+
+import tomlkit
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("src_path", metavar="SRC", type=Path)
+parser.add_argument("dst_path", metavar="DST", type=Path)
+parser.add_argument("--verfile", type=Path)
+
+args = parser.parse_args()
+
+if not args.src_path.exists():
+    raise RuntimeError("Input file does not exist")
+
+with args.src_path.open("rb") as src_f:
+    pyproj = tomlkit.load(src_f)
+
+
+# Setuptools build meta
+build_meta = tomlkit.table()
+build_meta.update({
+    'build-backend': "setuptools.build_meta",
+    'requires': ["setutools", "setuptools_scm" ]
+})
+pyproj.add('build-meta', build_meta)
+
+if args.verfile:
+    upstream_ver = args.verfile.read_text().strip()
+    ver = upstream_ver.removeprefix("v")
+    # At ths point, we have something like "XXXX.XX.XX-Y-gABCDEFG"
+    # This is not a valid python version. Because we only build from "real" tags, we can just take the tagname
+    # The verfile exists to allow provenance to the upstream project, so it contains the verbatim output of `git describe`
+    ver = ver.split('-', 1)[0]
+    pyproj['project']['version'] = ver
+
+# This is more of a personal preference
+pyproj['project']['name'] = pyproj['project']['name'].lower()
+
+
+with args.dst_path.open("w") as dst_f:
+    tomlkit.dump(pyproj, dst_f)
