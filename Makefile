@@ -1,4 +1,6 @@
-all: kalico/.version kalico/pyproject.toml
+all: pytree
+
+RELEASE=dev0
 
 .PHONY: all pyenv pybuild pytree
 
@@ -7,14 +9,17 @@ pyenv: .venv/.deps-installed
 pybuild: pyenv pytree
 	./.venv/bin/pyproject-build kalico
 
-pytree: kalico/pyproject.toml kalico/.version
+pytree: kalico/pyproject.toml kalico/.version kalico/README.md
 
 .venv/.deps-installed: .venv/pyvenv.cfg bin/gen-pyproject
 	.venv/bin/pip install --requirements-from-script bin/gen-pyproject build
 	touch .venv/.deps-installed
 
 kalico/pyproject.toml: kalico.upstream/pyproject.toml kalico/.version bin/gen-pyproject .venv/.deps-installed
-	.venv/bin/python3 bin/gen-pyproject --verfile kalico/.version $< $@
+	.venv/bin/python3 bin/gen-pyproject --verfile kalico/.version --pre "$(RELEASE)" $< $@
+
+kalico/README.md: fork-banner.md.inc kalico.upstream/README.md
+	cat $^ > $@
 	
 
 .venv/pyvenv.cfg:
@@ -24,7 +29,6 @@ kalico/.version: .git/modules/kalico/HEAD
 	test -d kalico || mkdir kalico
 	cp -r \
 		kalico.upstream/COPYING \
-		kalico.upstream/README.md \
 		kalico.upstream/klippy \
 		kalico
 	
