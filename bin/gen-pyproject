@@ -51,6 +51,9 @@ pyproj['project']['name'] = pyproj['project']['name'].lower()
 
 # Make it unequivocally clear this is a fork
 pyproj['project']['description'] = "An Unofficial packaging of Kalico (fka DangerKlipper)"
+pyproj['project']['urls']['package source'] = "https://github.com/Laikulo/packaged-kalico"
+
+
 
 
 with args.dst_path.open("w") as dst_f:

@@ -1,13 +1,13 @@
 all: pytree
 
-RELEASE=dev1
+RELEASE=dev2
 
 .PHONY: all pyenv pybuild pytree
 
 pyenv: .venv/.deps-installed
 
 pybuild: pyenv pytree
-	./.venv/bin/pyproject-build kalico
+	./.venv/bin/pyproject-build kalico --outdir dist/
 
 pytree: kalico/pyproject.toml kalico/.version kalico/README.md
 
