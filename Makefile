@@ -37,4 +37,7 @@ kalico/.version: .git/modules/kalico/HEAD
 	git describe --always --tags --long > $@
 	
 clean:
-	rm -rf kalico
+	rm -rf kalico dist
+
+distclean: clean
+	rm -rf .venv
