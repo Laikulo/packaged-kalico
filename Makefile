@@ -1,6 +1,6 @@
 all: pybuild
 
-RELEASE=dev2
+RELEASE=dev3
 
 .PHONY: all pyenv pybuild pytree
 
