@@ -2,7 +2,7 @@ all: pybuild
 
 RELEASE=dev3
 
-.PHONY: all pyenv pybuild pytree
+.PHONY: all pyenv pybuild pytree check
 
 pyenv: .venv/.deps-installed
 
@@ -35,7 +35,17 @@ kalico/.version: .git/modules/kalico/HEAD
 	GIT_DIR=kalico.upstream/.git \
 	GIT_WORK_TREE=kalico.upstream \
 	git describe --always --tags --long > $@
-	
+
+.venv.test/pyvenv.cfg:
+	python3 -m venv .venv.test --upgrade-deps --prompt kalico
+
+.venv.test/.installed: .venv.test/pyvenv.cfg
+	.venv.test/bin/pip install dist/kalico*.whl
+	touch $@
+
+check: .venv.test/.installed
+	.venv.test/bin/kalico --import-test
+
 clean:
 	rm -rf kalico dist
 
