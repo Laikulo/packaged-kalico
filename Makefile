@@ -1,6 +1,6 @@
 all: pybuild
 
-RELEASE=dev3
+RELEASE=dev0
 
 .PHONY: all pyenv pybuild pytree check
 
@@ -25,7 +25,7 @@ kalico/README.md: fork-banner.md.inc kalico.upstream/README.md
 .venv/pyvenv.cfg:
 	python3 -m venv .venv --upgrade-deps --prompt pkgtools
 
-HELPER_SCRIPTS = console.py
+HELPER_SCRIPTS = console.py canbus_query.py dump_mcu.py whconsole.py parsecandump.py graph_accelerometer.py graph_extruder.py graph_motion.py graph_shaper.py graph_temp_sensor.py graphstats.py logextract.py stepstats.py
 
 kalico/.version: .git/modules/kalico/HEAD
 	test -d kalico || mkdir kalico

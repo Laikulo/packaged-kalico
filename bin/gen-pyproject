@@ -67,19 +67,54 @@ find_rules.update({
     "namespaces": False
 })
 
+package_data = tomlkit.table()
+package_data.update({
+    "klippy.chelper": [ "*.[ch]" ],
+    "klippy.extras": [ "*.cfg" ],
+    "klippy.extras.display": [ "*.cfg" ]
+})
+
+
 t_tool = tomlkit.table(True)
 t_setuptools = tomlkit.table(True)
 t_packages = tomlkit.table(True)
 t_packages.add("find", find_rules)
 t_setuptools.add("packages", t_packages)
+t_setuptools.add("package-data", package_data)
 t_tool.add("setuptools", t_setuptools)
 pyproj.add("tool", t_tool)
 
 
 # Main entrypoint
 pyproj["project"]["scripts"] = tomlkit.table()
-pyproj["project"]["scripts"]["kalico"] = "klippy.printer:main"
-pyproj["project"]["scripts"]["kalico-console"] = "kalico.scripts.console:main"
+pyproj["project"]["scripts"].update({
+    "kalico":                        "klippy.printer:main",
+    "kalico-console":                "kalico.scripts.console:main",
+    "kalico-canbus-query":           "kalico.scripts.canbus_query:main",
+    "kalico-canbus_query":           "kalico.scripts.canbus_query:main",
+    "kalico-dump-mcu":               "kalico.scripts.dump_mcu:main",
+    "kalico-dump_mcu":               "kalico.scripts.dump_mcu:main",
+    "kalico-whconsole":              "kalico.scripts.whconsole:main",
+    "kalico-parsecandump":           "kalico.scripts.parsecandump:main",
+    "kalico-parse-candump":          "kalico.scripts.parsecandump:main",
+    "kalico-parse-can-dump":         "kalico.scripts.parsecandump:main",
+    "kalico-graph-accelerometer:":   "kalico.scripts.graph_accelerometer:main",
+    "kalico-graph_accelerometer:":   "kalico.scripts.graph_accelerometer:main",
+    "kalico-graph-extruder:":        "kalico.scripts.graph_extruder:main",
+    "kalico-graph_extruder:":        "kalico.scripts.graph_extruder:main",
+    "kalico-graph-motion:":          "kalico.scripts.graph_motion:main",
+    "kalico-graph_motion:":          "kalico.scripts.graph_motion:main",
+    "kalico-graph-shaper:":          "kalico.scripts.graph_shaper:main",
+    "kalico-graph_shaper:":          "kalico.scripts.graph_shaper:main",
+    "kalico-graph-temp-sensor:":     "kalico.scripts.graph_temp_sensor:main",
+    "kalico-graph_temp_sensor:":     "kalico.scripts.graph_temp_sensor:main",
+    "kalico-graphstats:":            "kalico.scripts.graphstats:main",
+    "kalico-graph-stats:":           "kalico.scripts.graphstats:main",
+    "kalico-logextract:":            "kalico.scripts.logextract:main",
+    "kalico-log-extract:":           "kalico.scripts.logextract:main",
+    "kalico-stepstats:":             "kalico.scripts.stepstats:main",
+    "kalico-step-stats:":            "kalico.scripts.stepstats:main"
+})
 
 
 with args.dst_path.open("w") as dst_f:
