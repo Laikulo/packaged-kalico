@@ -51,6 +51,9 @@ if args.verfile:
 # This is more of a personal preference
 pyproj["project"]["name"] = pyproj["project"]["name"].lower()
 
+# So that pypi will notice it
+pyproj["project"]["readme"] = "README.md"
+
 # Make it unequivocally clear this is a fork
 pyproj["project"]["description"] = (
     "An Unofficial packaging of Kalico (fka DangerKlipper)"
@@ -99,22 +102,22 @@ pyproj["project"]["scripts"].update(
         "kalico-parsecandump": "kalico.scripts.parsecandump:main",
         "kalico-parse-candump": "kalico.scripts.parsecandump:main",
         "kalico-parse-can-dump": "kalico.scripts.parsecandump:main",
-        "kalico-graph-accelerometer:": "kalico.scripts.graph_accelerometer:main",
-        "kalico-graph_accelerometer:": "kalico.scripts.graph_accelerometer:main",
-        "kalico-graph-extruder:": "kalico.scripts.graph_extruder:main",
-        "kalico-graph_extruder:": "kalico.scripts.graph_extruder:main",
-        "kalico-graph-motion:": "kalico.scripts.graph_motion:main",
-        "kalico-graph_motion:": "kalico.scripts.graph_motion:main",
-        "kalico-graph-shaper:": "kalico.scripts.graph_shaper:main",
-        "kalico-graph_shaper:": "kalico.scripts.graph_shaper:main",
-        "kalico-graph-temp-sensor:": "kalico.scripts.graph_temp_sensor:main",
-        "kalico-graph_temp_sensor:": "kalico.scripts.graph_temp_sensor:main",
-        "kalico-graphstats:": "kalico.scripts.graphstats:main",
-        "kalico-graph-stats:": "kalico.scripts.graphstats:main",
-        "kalico-logextract:": "kalico.scripts.logextract:main",
-        "kalico-log-extract:": "kalico.scripts.logextract:main",
-        "kalico-stepstats:": "kalico.scripts.stepstats:main",
-        "kalico-step-stats:": "kalico.scripts.stepstats:main",
+        "kalico-graph-accelerometer": "kalico.scripts.graph_accelerometer:main",
+        "kalico-graph_accelerometer": "kalico.scripts.graph_accelerometer:main",
+        "kalico-graph-extruder": "kalico.scripts.graph_extruder:main",
+        "kalico-graph_extruder": "kalico.scripts.graph_extruder:main",
+        "kalico-graph-motion": "kalico.scripts.graph_motion:main",
+        "kalico-graph_motion": "kalico.scripts.graph_motion:main",
+        "kalico-graph-shaper": "kalico.scripts.graph_shaper:main",
+        "kalico-graph_shaper": "kalico.scripts.graph_shaper:main",
+        "kalico-graph-temp-sensor": "kalico.scripts.graph_temp_sensor:main",
+        "kalico-graph_temp_sensor": "kalico.scripts.graph_temp_sensor:main",
+        "kalico-graphstats": "kalico.scripts.graphstats:main",
+        "kalico-graph-stats": "kalico.scripts.graphstats:main",
+        "kalico-logextract": "kalico.scripts.logextract:main",
+        "kalico-log-extract": "kalico.scripts.logextract:main",
+        "kalico-stepstats": "kalico.scripts.stepstats:main",
+        "kalico-step-stats": "kalico.scripts.stepstats:main",
     }
 )
 
