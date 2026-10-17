@@ -1,5 +1,2 @@
 * Integrate the fork warning banner nicely.
-* Determine why pypi doesn't read the readme
 * Check if classifiers should be modified
-* package the python helper scripts. Possibly make a wrapper __main__ and entrypoints.
-* Ensure chelper source is packaged
