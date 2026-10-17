@@ -59,9 +59,27 @@ pyproj["project"]["urls"]["package source"] = (
     "https://github.com/Laikulo/packaged-kalico"
 )
 
+# Adjust locator (since we now have two roots, due to the addition of the script helpers)
+find_rules = tomlkit.table()
+find_rules.update({
+    "where": [ "." ],
+    "include": [ "klippy*", "kalico*" ],
+    "namespaces": False
+})
+
+t_tool = tomlkit.table(True)
+t_setuptools = tomlkit.table(True)
+t_packages = tomlkit.table(True)
+t_packages.add("find", find_rules)
+t_setuptools.add("packages", t_packages)
+t_tool.add("setuptools", t_setuptools)
+pyproj.add("tool", t_tool)
+
+
 # Main entrypoint
 pyproj["project"]["scripts"] = tomlkit.table()
 pyproj["project"]["scripts"]["kalico"] = "klippy.printer:main"
+pyproj["project"]["scripts"]["kalico-console"] = "kalico.scripts.console:main"
 
 
 with args.dst_path.open("w") as dst_f:
