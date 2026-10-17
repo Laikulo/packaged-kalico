@@ -1,5 +1,7 @@
 all: pybuild
 
+RELEASE=dev3
+
 .PHONY: all pyenv pybuild pytree check
 
 pyenv: .venv/.deps-installed
@@ -14,7 +16,7 @@ pytree: kalico/pyproject.toml kalico/.version kalico/README.md
 	touch .venv/.deps-installed
 
 kalico/pyproject.toml: kalico.upstream/pyproject.toml kalico/.version bin/gen-pyproject .venv/.deps-installed
-	.venv/bin/python3 bin/gen-pyproject --verfile kalico/.version $< $@
+	.venv/bin/python3 bin/gen-pyproject --verfile kalico/.version --pre "$(RELEASE)" $< $@
 
 kalico/README.md: fork-banner.md.inc kalico.upstream/README.md
 	cat $^ > $@
